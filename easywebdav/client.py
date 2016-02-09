@@ -187,3 +187,7 @@ class Client(object):
     def exists(self, remote_path):
         response = self._send('HEAD', remote_path, (200, 301, 404))
         return True if response.status_code != 404 else False
+
+    def get_size(self, remote_path):
+        response = self._send('GET', remote_path, 200, stream=True)
+        return response.headers.get('content-length', 0)
