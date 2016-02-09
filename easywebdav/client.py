@@ -190,4 +190,4 @@ class Client(object):
 
     def get_size(self, remote_path):
         response = self._send('GET', remote_path, 200, stream=True)
-        return response.headers.get('content-length', 0)
+        return int(response.headers.get('content-length', 0))
